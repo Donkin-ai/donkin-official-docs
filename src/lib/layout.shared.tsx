@@ -1,5 +1,7 @@
 import type { BaseLayoutProps } from "fumadocs-ui/layouts/shared";
 import NextImage from "next/image";
+import XIcon from "@/components/icons/x";
+import TelegramIcon from "@/components/icons/tg";
 
 /**
  * Shared layout configurations
@@ -13,7 +15,22 @@ export function baseOptions(): BaseLayoutProps {
     nav: {
       title: (
         <>
-          <NextImage src="/assets/donkin-logo.svg" alt="Logo" width={24} height={24} quality={90} />
+          <NextImage
+            src="/assets/donkin-logo.svg"
+            className="hidden dark:block"
+            alt="Logo"
+            width={24}
+            height={24}
+            quality={90}
+          />
+          <NextImage
+            src="/assets/donkin-logo.light.svg"
+            className="block dark:hidden p-1"
+            alt="Logo"
+            width={24}
+            height={24}
+            quality={90}
+          />
           Donkin
         </>
       ),
@@ -21,16 +38,18 @@ export function baseOptions(): BaseLayoutProps {
     // see https://fumadocs.dev/docs/ui/navigation/links
     links: [
       {
-        icon: <NextImage src="/assets/x.svg" alt="x" width={16} height={16} quality={90} />,
+        icon: <XIcon className="max-w-3 max-h-3" />,
         text: "Donkin on X",
         url: "https://x.com/DonkinAI",
-        secondary: false,
+        secondary: true,
+        type: "icon",
       },
       {
-        icon: <NextImage src="/assets/tg.svg" alt="Telegram" width={16} height={16} quality={90} />,
+        icon: <TelegramIcon className="max-w-4 max-h-4" />,
         text: "Donkin on Telegram",
         url: "https://t.co/vf4AjZVo6T",
-        secondary: false,
+        secondary: true,
+        type: "icon",
       },
     ],
   };
