@@ -43,6 +43,7 @@ export function baseOptions(): BaseLayoutProps {
         url: "https://x.com/DonkinAI",
         secondary: true,
         type: "icon",
+        external: true,
       },
       {
         icon: <TelegramIcon className="max-w-4 max-h-4" />,
@@ -50,6 +51,7 @@ export function baseOptions(): BaseLayoutProps {
         url: "https://t.co/vf4AjZVo6T",
         secondary: true,
         type: "icon",
+        external: true,
       },
     ],
   };

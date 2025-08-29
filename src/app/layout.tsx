@@ -1,4 +1,4 @@
-import "@/app/global.css";
+import "@/themes/global.css";
 import { Inter } from "next/font/google";
 import { RootProvider } from "@/components/root-provider";
 
