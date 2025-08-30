@@ -1,0 +1,103 @@
+---
+title: Accordion
+description: 為您的文檔添加 Accordion 組件
+---
+
+## 介紹
+
+基於 [Radix UI Accordion](https://www.radix-ui.com/docs/primitives/components/accordion) 構建，適用於常見問題解答（FAQ）等功能區塊。
+
+## 使用方法
+
+<Accordions type="single">
+<Accordion title="什麼是 Fumadocs？" id="what-is-fumadocs">
+
+Fumadocs 是一個文檔框架，設計快速、靈活，並能無縫整合到您的 React 框架中。
+
+</Accordion>
+<Accordion title="我們喜歡什麼？">
+
+我們喜歡簡單易用且功能強大的工具，能夠讓開發者專注於內容創作而不是複雜的配置。
+
+</Accordion>
+</Accordions>
+
+```mdx
+import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
+
+<Accordions type="single">
+  <Accordion title="我的標題">我的內容</Accordion>
+</Accordions>
+```
+
+### API 參考
+
+#### Accordions
+
+<TypeTable
+  type={{
+    asChild: {
+      description: '是否作為子組件渲染',
+      type: 'boolean',
+    },
+    type: {
+      description: 'Accordion 展開方式',
+      type: '"single" | "multiple"',
+      default: '"single"',
+    },
+    disabled: {
+      description: '是否禁用所有 Accordion',
+      type: 'boolean',
+      default: 'false',
+    },
+    orientation: {
+      description: '排列方向',
+      type: '"horizontal" | "vertical"',
+      default: '"vertical"',
+    },
+  }}
+/>
+
+#### Accordion
+
+<TypeTable
+  type={{
+    asChild: {
+      description: '是否作為子組件渲染',
+      type: 'boolean',
+    },
+    title: {
+      description: '顯示的標題',
+      type: 'string',
+    },
+    id: {
+      description: '標籤，用於連結該錨點',
+      type: 'string',
+    },
+    disabled: {
+      description: '是否禁用該 Accordion 的展開',
+      type: 'boolean',
+      default: 'false',
+    },
+    value: {
+      description: 'Accordion 的值',
+      type: 'string',
+    },
+  }}
+/>
+
+### 連結到 Accordion
+
+您可以為 accordion 指定一個 `id`。當用戶導航到頁面並在網址的雜湊參數中包含指定的 `id` 時，accordion 會自動展開。
+
+```mdx
+<Accordions>
+<Accordion title="我的標題" id="my-title">
+
+我的內容
+
+</Accordion>
+</Accordions>
+```
+
+預設情況下，accordion 的值與標題相同。當存在 id 時，會使用 id 作為值。

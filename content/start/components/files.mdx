@@ -1,0 +1,306 @@
+---
+title: Files
+description: 用於在文檔中展示文件結構的組件
+---
+
+## 介紹
+
+Files 組件用於在文檔中展示文件和資料夾結構，讓您能夠清晰地展示專案的目錄結構或文件組織方式。這對於教學、文檔說明或專案介紹非常有用。
+
+## 基本用法
+
+使用 `Files` 組件包裝 `File` 和 `Folder` 組件來展示文件結構：
+
+<Files>
+  <Folder name="app" defaultOpen>
+    <File name="layout.tsx" />
+    <File name="page.tsx" />
+    <File name="global.css" />
+  </Folder>
+  <Folder name="components">
+    <File name="button.tsx" />
+    <File name="tabs.tsx" />
+    <File name="dialog.tsx" />
+  </Folder>
+  <File name="package.json" />
+</Files>
+
+```mdx
+<Files>
+  <Folder name="app" defaultOpen>
+    <File name="layout.tsx" />
+    <File name="page.tsx" />
+    <File name="global.css" />
+  </Folder>
+  <Folder name="components">
+    <File name="button.tsx" />
+    <File name="tabs.tsx" />
+    <File name="dialog.tsx" />
+  </Folder>
+  <File name="package.json" />
+</Files>
+```
+
+## 巢狀資料夾結構
+
+您可以創建多層巢狀的資料夾結構：
+
+<Files>
+  <Folder name="src" defaultOpen>
+    <Folder name="app" defaultOpen>
+      <Folder name="(home)">
+        <File name="layout.tsx" />
+        <File name="page.tsx" />
+      </Folder>
+      <Folder name="docs">
+        <File name="layout.tsx" />
+        <File name="page.tsx" />
+      </Folder>
+      <File name="layout.tsx" />
+      <File name="globals.css" />
+    </Folder>
+    <Folder name="components">
+      <Folder name="ui">
+        <File name="button.tsx" />
+        <File name="card.tsx" />
+        <File name="dialog.tsx" />
+      </Folder>
+      <File name="header.tsx" />
+      <File name="footer.tsx" />
+    </Folder>
+    <Folder name="lib">
+      <File name="utils.ts" />
+      <File name="auth.ts" />
+    </Folder>
+  </Folder>
+  <File name="package.json" />
+  <File name="tsconfig.json" />
+  <File name="tailwind.config.js" />
+</Files>
+
+```mdx
+<Files>
+  <Folder name="src" defaultOpen>
+    <Folder name="app" defaultOpen>
+      <Folder name="(home)">
+        <File name="layout.tsx" />
+        <File name="page.tsx" />
+      </Folder>
+      <Folder name="docs">
+        <File name="layout.tsx" />
+        <File name="page.tsx" />
+      </Folder>
+      <File name="layout.tsx" />
+      <File name="globals.css" />
+    </Folder>
+    <Folder name="components">
+      <Folder name="ui">
+        <File name="button.tsx" />
+        <File name="card.tsx" />
+        <File name="dialog.tsx" />
+      </Folder>
+      <File name="header.tsx" />
+      <File name="footer.tsx" />
+    </Folder>
+    <Folder name="lib">
+      <File name="utils.ts" />
+      <File name="auth.ts" />
+    </Folder>
+  </Folder>
+  <File name="package.json" />
+  <File name="tsconfig.json" />
+  <File name="tailwind.config.js" />
+</Files>
+```
+
+## 自定義圖標
+
+您可以為文件添加自定義圖標：
+
+<Files>
+  <Folder name="專案資料夾" defaultOpen>
+    <File name="README.md" icon={<BookOpen className="w-4 h-4" />} />
+    <File name="package.json" icon={<Package className="w-4 h-4" />} />
+    <File name="tsconfig.json" icon={<Settings className="w-4 h-4" />} />
+    <Folder name="src">
+      <File name="index.ts" icon={<FileText className="w-4 h-4" />} />
+      <File name="types.d.ts" icon={<Code className="w-4 h-4" />} />
+    </Folder>
+  </Folder>
+</Files>
+
+```mdx
+<Files>
+  <Folder name="專案資料夾" defaultOpen>
+    <File name="README.md" icon={<BookOpen className="w-4 h-4" />} />
+    <File name="package.json" icon={<Package className="w-4 h-4" />} />
+    <File name="tsconfig.json" icon={<Settings className="w-4 h-4" />} />
+    <Folder name="src">
+      <File name="index.ts" icon={<FileText className="w-4 h-4" />} />
+      <File name="types.d.ts" icon={<Code className="w-4 h-4" />} />
+    </Folder>
+  </Folder>
+</Files>
+```
+
+## 禁用資料夾
+
+您可以禁用某些資料夾，使其無法展開：
+
+<Files>
+  <Folder name="可展開的資料夾" defaultOpen>
+    <File name="file1.ts" />
+    <File name="file2.ts" />
+  </Folder>
+  <Folder name="禁用的資料夾" disabled>
+    <File name="file3.ts" />
+    <File name="file4.ts" />
+  </Folder>
+  <File name="standalone.js" />
+</Files>
+
+```mdx
+<Files>
+  <Folder name="可展開的資料夾" defaultOpen>
+    <File name="file1.ts" />
+    <File name="file2.ts" />
+  </Folder>
+  <Folder name="禁用的資料夾" disabled>
+    <File name="file3.ts" />
+    <File name="file4.ts" />
+  </Folder>
+  <File name="standalone.js" />
+</Files>
+```
+
+## API 參考
+
+### Files
+
+容器組件，用於包裝所有文件和資料夾組件。
+
+### File
+
+<TypeTable
+  type={{
+    name: {
+      description: '文件名稱',
+      type: 'string',
+    },
+    icon: {
+      description: '自定義圖標',
+      type: 'ReactNode',
+    },
+  }}
+/>
+
+### Folder
+
+<TypeTable
+  type={{
+    name: {
+      description: '資料夾名稱',
+      type: 'string',
+    },
+    disabled: {
+      description: '是否禁用資料夾展開功能',
+      type: 'boolean',
+      default: 'false',
+    },
+    defaultOpen: {
+      description: '預設是否展開資料夾',
+      type: 'boolean',
+      default: 'false',
+    },
+  }}
+/>
+
+## 使用場景
+
+### 專案結構說明
+
+用於展示專案的目錄結構，幫助讀者理解專案組織：
+
+<Files>
+  <Folder name="my-next-app" defaultOpen>
+    <Folder name="app" defaultOpen>
+      <File name="layout.tsx" />
+      <File name="page.tsx" />
+      <File name="loading.tsx" />
+      <File name="error.tsx" />
+      <File name="not-found.tsx" />
+    </Folder>
+    <Folder name="components">
+      <File name="Header.tsx" />
+      <File name="Footer.tsx" />
+      <File name="Sidebar.tsx" />
+    </Folder>
+    <Folder name="lib">
+      <File name="utils.ts" />
+      <File name="db.ts" />
+    </Folder>
+    <Folder name="public">
+      <File name="favicon.ico" />
+      <File name="logo.svg" />
+    </Folder>
+    <File name="package.json" />
+    <File name="next.config.js" />
+    <File name="tsconfig.json" />
+    <File name="tailwind.config.js" />
+  </Folder>
+</Files>
+
+### 安裝步驟說明
+
+展示安裝或設置過程中會創建的文件：
+
+<Files>
+  <Folder name="新專案" defaultOpen>
+    <File name="📝 步驟 1: 創建 package.json" />
+    <File name="📦 步驟 2: 安裝依賴" />
+    <Folder name="src" defaultOpen>
+      <File name="🚀 步驟 3: 創建主文件" />
+      <File name="⚙️ 步驟 4: 配置設定" />
+    </Folder>
+    <File name="✅ 步驟 5: 完成設置" />
+  </Folder>
+</Files>
+
+### 配置文件說明
+
+用於展示不同的配置文件和其用途：
+
+<Files>
+  <Folder name="配置文件" defaultOpen>
+    <File name="package.json" icon={<Package />} />
+    <File name="tsconfig.json" icon={<Settings />} />
+    <File name="tailwind.config.js" icon={<Paintbrush />} />
+    <File name="next.config.js" icon={<Zap />} />
+    <File name=".env.local" icon={<Key />} />
+    <File name=".gitignore" icon={<GitBranch />} />
+  </Folder>
+</Files>
+
+## 最佳實踐
+
+### 結構組織
+
+1. **清晰的層級**: 保持合理的資料夾深度，避免過深的巢狀
+2. **有意義的命名**: 使用清晰描述性的文件和資料夾名稱
+3. **適當的展開**: 使用 `defaultOpen` 展示重要的資料夾結構
+
+### 視覺效果
+
+1. **自定義圖標**: 為不同類型的文件使用合適的圖標
+2. **分組展示**: 將相關的文件組織在一起
+3. **重點突出**: 使用 `defaultOpen` 突出重要的部分
+
+### 文檔撰寫
+
+1. **配合說明**: Files 組件應該配合文字說明使用
+2. **逐步展示**: 在教學中可以逐步展示文件結構的建立
+3. **實際對應**: 確保展示的結構與實際專案結構相符
+
+<Callout type="info" title="提示">
+Files 組件非常適合用於專案介紹、安裝指南、教學文件等場景，能夠讓讀者快速理解專案的結構和組織方式。
+</Callout>

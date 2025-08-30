@@ -1,0 +1,347 @@
+---
+title: 頁面結構與文件組織
+description: 了解 Fumadocs 的頁面結構規範和文件組織方式
+---
+
+## 概述
+
+Fumadocs 使用 `loader()` API 從您的內容目錄生成**頁面路徑**和**頁面樹**（側邊欄項目）。路由功能由您的 React 框架處理。
+
+您可以定義類似於基於文件系統路由的資料夾和頁面結構。
+
+<Files>
+  <Folder name="content/docs" defaultOpen>
+    <File name="index.mdx" />
+    <File name="getting-started.mdx" />
+    <Folder name="guides">
+      <File name="index.mdx" />
+      <File name="advanced.mdx" />
+    </Folder>
+  </Folder>
+</Files>
+
+<Callout type="info" title="適用範圍">
+本指南僅適用於使用 `loader()` API 的內容來源，例如 **Fumadocs MDX**。
+</Callout>
+
+## 文件
+
+對於 MDX 和 Markdown 文件，您可以從 frontmatter 自定義頁面資訊。
+
+```mdx
+---
+title: 我的頁面
+description: 最棒的文檔
+icon: HomeIcon
+---
+
+## 了解更多
+```
+
+Fumadocs 從以下屬性檢測以構建頁面樹：
+
+<TypeTable
+  type={{
+    title: {
+      description: '頁面標題',
+      type: 'string',
+    },
+    description: {
+      description: '頁面描述',
+      type: 'string',
+    },
+    icon: {
+      description: '圖標名稱，請參閱圖標部分',
+      type: 'string',
+    },
+  }}
+/>
+
+<Callout title="注意事項">
+頁面資訊由內容來源提供，例如 **Fumadocs MDX**。
+
+在 Fumadocs MDX 中，您可以指定 schema 選項來自定義 frontmatter 結構。
+</Callout>
+
+### 頁面路徑
+
+頁面的路徑是從其文件路徑生成的：
+
+| 路徑（相對於內容資料夾） | 路徑陣列 |
+|------------------------|----------|
+| `./dir/page.mdx` | `['dir', 'page']` |
+| `./dir/index.mdx` | `['dir']` |
+| `./nested/folder/page.mdx` | `['nested', 'folder', 'page']` |
+
+## 資料夾
+
+組織多個頁面時，您可以創建 Meta 文件來自定義資料夾。
+
+### 資料夾群組
+
+預設情況下，將文件放入資料夾會改變其路徑。您可以用括號包裹資料夾名稱以避免影響子文件的路徑。
+
+| 路徑（相對於內容資料夾） | 路徑陣列 |
+|------------------------|----------|
+| `./(group-name)/page.mdx` | `['page']` |
+| `./(ui)/components/button.mdx` | `['components', 'button']` |
+
+### 根資料夾
+
+將資料夾標記為根資料夾，只有打開的根資料夾中的項目才會可見。
+
+```json title="meta.json"
+{
+  "title": "資料夾名稱",
+  "description": "根資料夾的描述（可選）",
+  "root": true
+}
+```
+
+例如，當您打開根資料夾 `framework` 時，其他資料夾（例如 `headless`）不會顯示在側邊欄和其他導航元素中。
+
+<Files>
+  <Folder name="framework" defaultOpen>
+    <File name="index.mdx" />
+    <File name="current-page.mdx" />
+    <File name="other-pages.mdx" />
+  </Folder>
+  <Folder name="headless (隱藏)" disabled>
+    <File name="my-page.mdx" />
+  </Folder>
+</Files>
+
+<Callout title="Fumadocs UI">
+Fumadocs UI 將根資料夾渲染為側邊欄標籤，允許用戶在它們之間切換。
+</Callout>
+
+## Meta 文件
+
+透過在資料夾中創建 `meta.json` 文件來自定義資料夾：
+
+```json title="meta.json"
+{
+  "title": "顯示名稱",
+  "icon": "MyIcon",
+  "pages": ["index", "getting-started"],
+  "defaultOpen": true
+}
+```
+
+<TypeTable
+  type={{
+    title: {
+      description: '顯示名稱',
+      type: 'string',
+    },
+    icon: {
+      description: '圖標名稱，請參閱圖標部分',
+      type: 'string',
+    },
+    pages: {
+      description: '資料夾項目（見下方說明）',
+      type: 'string[]',
+    },
+    defaultOpen: {
+      description: '預設展開資料夾',
+      type: 'boolean',
+      default: 'false',
+    },
+  }}
+/>
+
+### 頁面排序
+
+資料夾項目預設按字母順序排序，您可以使用 `pages` 添加或控制項目的順序。
+
+```json title="meta.json"
+{
+  "pages": ["index", "getting-started"]
+}
+```
+
+指定後，除非在 `pages` 中列出，否則項目不會包含在內。
+
+**項目類型：**
+
+- **路徑**: 指向頁面或資料夾的路徑，如 `./nested/page`
+- **分隔符** (`---Label---`): 兩個部分之間的分隔符，使用 `---[Icon]Label---` 包含圖標
+- **連結** (`[Text](url)`): 插入連結，使用 `[Icon][Text](url)` 包含圖標
+
+**特殊項目：**
+
+- **剩餘** (`...`): 包含剩餘頁面（按字母順序排序）
+- **反向剩餘** (`z...a`): 反向的**剩餘**項目
+- **提取** (`...folder`): 從資料夾中提取項目
+- **排除** (`!item`): 從 `...` 或 `z...a` 中排除項目
+
+### 進階 Meta 範例
+
+```json title="meta.json"
+{
+  "title": "API 參考",
+  "pages": [
+    "components",
+    "---[Zap]核心功能---",
+    "...authentication",
+    "...",
+    "!deprecated-file",
+    "!old-folder",
+    "[GitHub](https://github.com)",
+    "[ExternalLink][官方網站](https://fumadocs.dev)"
+  ]
+}
+```
+
+## 圖標
+
+由於 Fumadocs 不包含圖標庫，您必須在運行時將圖標名稱轉換為 JSX 元素，並將其作為組件渲染。
+
+您可以向 `loader()` 添加圖標處理器：
+
+```typescript title="source.ts"
+import { createMDXSource } from 'fumadocs-mdx';
+import { icons } from 'lucide-react';
+
+export const source = createMDXSource({
+  // ... 其他配置
+  icon: (name) => {
+    if (name in icons) {
+      const Icon = icons[name as keyof typeof icons];
+      return <Icon />;
+    }
+  }
+});
+```
+
+## 國際化路由
+
+您可以為國際化路由定義不同的樣式：
+
+```typescript title="lib/i18n.ts"
+import type { I18nConfig } from 'fumadocs-core/i18n';
+
+export const i18n: I18nConfig = {
+  // 預設
+  parser: 'dot',
+  // 或者
+  parser: 'dir',
+};
+```
+
+### Dot 格式
+
+透過在文件名後添加 `.{locale}` 來為不同語言添加 Markdown/meta 文件：
+
+<Files>
+  <Folder name="content/docs" defaultOpen>
+    <File name="meta.json" />
+    <File name="meta.cn.json" />
+    <File name="get-started.mdx" />
+    <File name="get-started.cn.mdx" />
+  </Folder>
+</Files>
+
+對於預設語言，語言代碼是可選的。
+
+### Dir 格式
+
+所有內容文件按語言資料夾分組：
+
+<Files>
+  <Folder name="content/docs" defaultOpen>
+    <Folder name="en" defaultOpen>
+      <File name="meta.json" />
+      <File name="get-started.mdx" />
+    </Folder>
+    <Folder name="cn">
+      <File name="meta.json" />
+      <File name="get-started.mdx" />
+    </Folder>
+  </Folder>
+</Files>
+
+## 實際範例
+
+### 本專案結構
+
+讓我們看看本文檔專案的實際結構：
+
+<Files>
+  <Folder name="content" defaultOpen>
+    <Folder name="start" defaultOpen>
+      <File name="index.mdx" />
+      <File name="pages.mdx" />
+      <File name="template.mdx" />
+      <Folder name="components" defaultOpen>
+        <File name="index.mdx" />
+        <File name="accordion.mdx" />
+        <File name="callout.mdx" />
+        <File name="files.mdx" />
+        <File name="mermaid.mdx" />
+        <File name="meta.json" />
+      </Folder>
+      <File name="meta.json" />
+    </Folder>
+    <Folder name="docs">
+      <File name="about.mdx" />
+      <File name="faq.mdx" />
+      <File name="guides.mdx" />
+      <File name="meta.json" />
+    </Folder>
+  </Folder>
+</Files>
+
+### Meta 文件配置
+
+**start/meta.json**:
+```json
+{
+  "pages": [
+    "index",
+    "pages",
+    "components",
+    "template"
+  ]
+}
+```
+
+**start/components/meta.json**:
+```json
+{
+  "title": "Markdown 基本語法 & 元件",
+  "pages": [
+    "components",
+    "accordion",
+    "callout",
+    "files",
+    "mermaid"
+  ]
+}
+```
+
+## 最佳實踐
+
+### 文件組織
+
+1. **邏輯分組**: 將相關的文件組織在同一資料夾中
+2. **清晰命名**: 使用描述性的文件和資料夾名稱
+3. **適當嵌套**: 避免過深的資料夾結構
+4. **索引頁面**: 為每個資料夾提供 `index.mdx` 作為概述
+
+### Meta 文件使用
+
+1. **有序組織**: 使用 `pages` 陣列控制顯示順序
+2. **分隔符組織**: 使用分隔符將相關內容分組
+3. **外部連結**: 適當添加外部資源連結
+4. **圖標使用**: 為重要部分添加視覺識別
+
+### 國際化考量
+
+1. **一致結構**: 保持不同語言版本的文件結構一致
+2. **完整翻譯**: 確保 meta.json 文件也有相應的翻譯版本
+3. **適當命名**: 使用清晰的語言代碼標識
+
+<Callout type="success" title="提示">
+良好的文件組織結構不僅有助於用戶導航，也有助於維護和擴展您的文檔專案。
+</Callout>

@@ -1,0 +1,43 @@
+---
+title: 開始使用
+description: 開始使用 Fumadocs
+---
+
+## 介紹
+
+[Fumadocs](https://fumadocs.dev) <span className="text-fd-muted-foreground text-sm">(Foo-ma docs)</span> 是一個**文檔框架**，設計快速、靈活，
+並能無縫整合到您的 React 框架中。
+
+Fumadocs 有不同的組成部分：
+
+<Cards>
+  <Card icon={<CpuIcon className="text-purple-300" />} title="Fumadocs 核心">
+    處理大部分邏輯，包括文檔搜尋、內容來源適配器和 Markdown 擴展。
+  </Card>
+
+  <Card icon={<PanelsTopLeft className="text-blue-300" />} title="Fumadocs UI">
+    Fumadocs 的預設主題為文檔網站提供美觀的外觀和互動組件。
+  </Card>
+
+  <Card icon={<Database />} title="內容來源">
+    您內容的來源，可以是 CMS 或本地數據層，如 Fumadocs MDX（官方內容來源）。
+  </Card>
+
+  <Card icon={<Terminal />} title="Fumadocs CLI">
+    安裝 UI 組件和自動化工具的命令行工具，用於自定義布局。
+  </Card>
+</Cards>
+
+<Callout title="想了解更多？">
+  閱讀我們深入的「[什麼是 Fumadocs](https://fumadocs.dev/docs/ui/what-is-fumadocs)」介紹。
+</Callout>
+
+### 術語
+
+**Markdown/MDX：** Markdown 是一種用於創建格式化文本的標記語言。Fumadocs 原生支援 Markdown 和 MDX（Markdown 的超集）。
+
+> MDX 是一種用於在 Markdown 中嵌入 React 組件的語法。
+
+**[Bun](https://bun.sh)：** 一個 JavaScript 運行時，我們用它來運行腳本。
+
+雖然不是必需的，但一些 React.js 的基礎知識對進一步的自定義會很有用。

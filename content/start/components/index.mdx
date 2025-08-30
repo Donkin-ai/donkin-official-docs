@@ -1,0 +1,147 @@
+---
+title: Markdown 基本語法 & 元件
+description: Markdown 基本語法 & 元件
+---
+
+## 基本語法
+
+Markdown 是一種輕量級標記語言，讓你可以使用簡單的語法來格式化文本。以下是常用的 Markdown 語法：
+
+### 標題
+
+```markdown
+# 一級標題
+## 二級標題
+### 三級標題
+#### 四級標題
+##### 五級標題
+###### 六級標題
+```
+
+### 文字格式
+
+```markdown
+**粗體文字**
+*斜體文字*
+***粗斜體文字***
+~~刪除線~~
+`行內代碼`
+```
+
+**範例：**
+- **粗體文字**
+- *斜體文字*
+- ***粗斜體文字***
+- ~~刪除線~~
+- `行內代碼`
+
+### 列表
+
+#### 無序列表
+```markdown
+- 項目 1
+- 項目 2
+  - 子項目 2.1
+  - 子項目 2.2
+- 項目 3
+```
+
+#### 有序列表
+```markdown
+1. 第一項
+2. 第二項
+   1. 子項目 2.1
+   2. 子項目 2.2
+3. 第三項
+```
+
+### 連結和圖片
+
+```markdown
+[連結文字](https://example.com)
+[內部連結](/docs/guide)
+![圖片替代文字](image.jpg)
+![圖片與連結](image.jpg "圖片標題")
+```
+
+[Donkin.ai](https://donkin.ai)
+
+![圖片替代文字](https://avatars.githubusercontent.com/u/38397958?v=4 "圖片標題")
+
+### 程式碼區塊
+
+````markdown
+```javascript
+function hello() {
+  console.log("Hello World!");
+}
+```
+````
+
+### 引用
+
+```markdown
+> 這是一個引用
+> 
+> 可以有多行
+>> 巢狀引用
+```
+
+**範例：**
+> 這是一個引用
+> 
+> 可以有多行
+
+### 表格
+
+```markdown
+| 標題 1 | 標題 2 | 標題 3 |
+|--------|--------|--------|
+| 內容 1 | 內容 2 | 內容 3 |
+| 內容 4 | 內容 5 | 內容 6 |
+```
+
+**範例：**
+| 功能 | 語法 | 說明 |
+|------|------|------|
+| 粗體 | `**文字**` | 強調重要內容 |
+| 斜體 | `*文字*` | 輕微強調 |
+| 代碼 | `` `代碼` `` | 行內程式碼 |
+
+### 分隔線
+
+```markdown
+---
+***
+___
+```
+
+### 跳脫字元
+
+如果要顯示 Markdown 語法字元本身，請在前面加上反斜線：
+
+```markdown
+\*這不會變成斜體\*
+\`這不會變成代碼\`
+```
+
+## 元件列表
+
+除了基本的 Markdown 語法外，Fumadocs 還提供了一些常用的元件，可以幫助您快速構建文檔。
+
+目前已實裝的元件如下：
+
+<Cards>
+  <Card title="Accordion" href="/start/components/accordion">
+    摺疊面板組件，適用於 FAQ 等場景
+  </Card>
+  <Card title="Callout" href="/start/components/callout">
+    提示框組件，用於顯示重要訊息、警告或提示
+  </Card>
+  <Card title="Files" href="/start/components/files">
+    文件結構組件，用於展示專案目錄和文件組織
+  </Card>
+  <Card title="Mermaid" href="/start/components/mermaid">
+    圖表組件，用於繪製流程圖、時序圖等各種圖表
+  </Card>
+</Cards>

@@ -1,0 +1,177 @@
+---
+title: Mermaid
+description: 用於在文檔中渲染流程圖、時序圖等各種圖表的組件
+---
+
+## 介紹
+
+Mermaid 是一個強大的圖表和圖形化工具，可以讓您使用文字和代碼來創建圖
+
+## 使用方法
+
+在 MDX 文件中使用 Mermaid 組件來創建各種類型的圖表：
+
+### 流程圖
+
+<Mermaid
+  chart="
+graph TD;
+    A[開始] --> B{是否需要驗證?};
+    B -->|是| C[驗證用戶];
+    B -->|否| D[直接處理];
+    C --> E{驗證成功?};
+    E -->|是| D[處理請求];
+    E -->|否| F[返回錯誤];
+    D --> G[返回結果];
+    F --> H[結束];
+    G --> H;"
+/>
+
+```mdx
+<Mermaid
+  chart="
+graph TD;
+    A[開始] --> B{是否需要驗證?};
+    B -->|是| C[驗證用戶];
+    B -->|否| D[直接處理];
+    C --> E{驗證成功?};
+    E -->|是| D[處理請求];
+    E -->|否| F[返回錯誤];
+    D --> G[返回結果];
+    F --> H[結束];
+    G --> H;"
+/>
+```
+
+### 時序圖
+
+<Mermaid
+  chart="
+sequenceDiagram
+    participant 用戶
+    participant 前端
+    participant API
+    participant 資料庫
+    
+    用戶->>前端: 登入請求
+    前端->>API: 發送認證資料
+    API->>資料庫: 查詢用戶資訊
+    資料庫-->>API: 返回用戶資料
+    API-->>前端: 返回認證結果
+    前端-->>用戶: 顯示登入狀態"
+/>
+
+```mdx
+<Mermaid
+  chart="
+sequenceDiagram
+    participant 用戶
+    participant 前端
+    participant API
+    participant 資料庫
+    
+    用戶->>前端: 登入請求
+    前端->>API: 發送認證資料
+    API->>資料庫: 查詢用戶資訊
+    資料庫-->>API: 返回用戶資料
+    API-->>前端: 返回認證結果
+    前端-->>用戶: 顯示登入狀態"
+/>
+```
+
+### 甘特圖
+
+<Mermaid
+  chart="
+gantt
+    title 專案開發時程
+    dateFormat YYYY-MM-DD
+    section 設計階段
+    需求分析       :done, des1, 2024-01-01, 2024-01-15
+    UI/UX 設計     :done, des2, after des1, 15d
+    section 開發階段
+    前端開發       :active, dev1, 2024-02-01, 30d
+    後端開發       :dev2, after dev1, 20d
+    section 測試階段
+    功能測試       :test1, after dev2, 10d
+    整合測試       :test2, after test1, 5d"
+/>
+
+```mdx
+<Mermaid
+  chart="
+gantt
+    title 專案開發時程
+    dateFormat YYYY-MM-DD
+    section 設計階段
+    需求分析       :done, des1, 2024-01-01, 2024-01-15
+    UI/UX 設計     :done, des2, after des1, 15d
+    section 開發階段
+    前端開發       :active, dev1, 2024-02-01, 30d
+    後端開發       :dev2, after dev1, 20d
+    section 測試階段
+    功能測試       :test1, after dev2, 10d
+    整合測試       :test2, after test1, 5d"
+/>
+```
+
+### 圓餅圖
+
+<Mermaid
+  chart="
+pie title 網站流量來源
+    '搜尋引擎' : 42.3
+    '直接訪問' : 32.1
+    '社群媒體' : 15.2
+    '廣告' : 10.4"
+/>
+
+```mdx
+<Mermaid
+  chart="
+pie title 網站流量來源
+    '搜尋引擎' : 42.3
+    '直接訪問' : 32.1
+    '社群媒體' : 15.2
+    '廣告' : 10.4"
+/>
+```
+
+## API 參考
+
+### Mermaid 組件
+
+| 屬性 | 類型 | 說明 |
+|------|------|------|
+| `chart` | `string` | Mermaid 圖表的定義字符串 |
+
+## 支援的圖表類型
+
+Mermaid 支援多種圖表類型：
+
+- **流程圖 (Flowchart)**: 用於顯示流程和決策點
+- **時序圖 (Sequence Diagram)**: 顯示物件間的互動順序
+- **甘特圖 (Gantt Chart)**: 項目管理和時程規劃
+- **類別圖 (Class Diagram)**: 顯示系統的結構
+- **狀態圖 (State Diagram)**: 顯示狀態轉換
+- **圓餅圖 (Pie Chart)**: 顯示比例關係
+- **Git 圖 (Git Graph)**: 顯示 Git 分支和提交
+
+## 最佳實踐
+
+### 圖表設計建議
+
+1. **保持簡潔**: 避免在單一圖表中包含過多資訊
+2. **使用描述性標籤**: 確保節點和連接的標籤清晰易懂
+3. **適當分組**: 使用子圖來組織相關的元素
+4. **一致的命名**: 在整個專案中保持一致的命名約定
+
+### 性能考量
+
+1. **複雜圖表分解**: 將複雜的圖表拆分為多個較小的圖表
+2. **適當的快取**: 利用組件內建的快取機制
+3. **條件渲染**: 在需要時才渲染圖表
+
+<Callout type="info" title="更多資源">
+想了解更多 Mermaid 語法和功能，請參考 [Mermaid 官方文檔](https://mermaid.js.org/)。
+</Callout>

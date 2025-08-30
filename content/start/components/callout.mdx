@@ -1,0 +1,147 @@
+---
+title: Callout
+description: 用於添加提示、警告等重要資訊的組件
+---
+
+## 介紹
+
+Callout 組件用於突出顯示重要訊息，如提示、警告、錯誤或成功訊息。它是 Fumadocs 內建的組件，預設已經包含在文檔中。
+
+## 基本用法
+
+最簡單的用法，使用預設的 `info` 類型：
+
+<Callout>
+這是一個基本的 Callout 範例
+</Callout>
+
+```mdx
+<Callout>這是一個基本的 Callout 範例</Callout>
+```
+
+## 添加標題
+
+您可以為 Callout 添加自定義標題：
+
+<Callout title="重要提示">
+這個 Callout 有自定義標題
+</Callout>
+
+```mdx
+<Callout title="重要提示">
+這個 Callout 有自定義標題
+</Callout>
+```
+
+## Callout 類型
+
+Callout 支援四種不同的類型，每種類型都有不同的顏色和圖標：
+
+### Info（預設）
+
+<Callout type="info" title="資訊">
+這是一個資訊類型的 Callout，用於提供一般性訊息。
+</Callout>
+
+```mdx
+<Callout type="info" title="資訊">
+這是一個資訊類型的 Callout，用於提供一般性訊息。
+</Callout>
+```
+
+### Warning
+
+<Callout type="warn" title="警告">
+這是一個警告類型的 Callout，用於提醒用戶注意重要事項。
+</Callout>
+
+```mdx
+<Callout type="warn" title="警告">
+這是一個警告類型的 Callout，用於提醒用戶注意重要事項。
+</Callout>
+```
+
+您也可以使用 `warning` 作為類型名稱：
+
+```mdx
+<Callout type="warning" title="警告">
+內容相同，`warn` 和 `warning` 都可以使用
+</Callout>
+```
+
+### Error
+
+<Callout type="error" title="錯誤">
+這是一個錯誤類型的 Callout，用於顯示錯誤訊息或重要警告。
+</Callout>
+
+```mdx
+<Callout type="error" title="錯誤">
+這是一個錯誤類型的 Callout，用於顯示錯誤訊息或重要警告。
+</Callout>
+```
+
+### Success
+
+<Callout type="success" title="成功">
+這是一個成功類型的 Callout，用於顯示成功訊息或正面提示。
+</Callout>
+
+```mdx
+<Callout type="success" title="成功">
+這是一個成功類型的 Callout，用於顯示成功訊息或正面提示。
+</Callout>
+```
+
+## 支援的類型列表
+
+| 類型 | 別名 | 用途 |
+|------|------|------|
+| `info` | - | 一般資訊（預設） |
+| `warn` | `warning` | 警告訊息 |
+| `error` | - | 錯誤訊息 |
+| `success` | - | 成功訊息 |
+
+## 複雜內容
+
+Callout 內可以包含任何 Markdown 內容，包括列表、連結、程式碼等：
+
+<Callout title="複雜內容範例" type="info">
+這個 Callout 包含：
+
+- **粗體文字**
+- [連結範例](https://fumadocs.dev)
+- `行內程式碼`
+
+您甚至可以包含程式碼區塊：
+
+```javascript
+console.log("Hello from Callout!");
+```
+</Callout>
+
+```mdx
+<Callout title="複雜內容範例" type="info">
+這個 Callout 包含：
+
+- **粗體文字**
+- [連結範例](https://fumadocs.dev)
+- `行內程式碼`
+
+</Callout>
+```
+
+## 最佳實踐
+
+### 何時使用 Callout
+
+- **Info**: 提供額外的背景資訊或提示
+- **Warning**: 提醒用戶潛在的問題或需要注意的事項
+- **Error**: 指出錯誤、問題或強烈建議避免的做法
+- **Success**: 確認成功的操作或推薦的最佳實踐
+
+### 使用建議
+
+1. **保持簡潔**: Callout 應該包含重點訊息，避免過長的內容
+2. **適當使用**: 不要在一個頁面中使用過多的 Callout，以免分散注意力
+3. **選擇合適的類型**: 根據訊息的重要性和性質選擇適當的類型

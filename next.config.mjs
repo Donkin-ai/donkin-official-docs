@@ -4,6 +4,7 @@ const withMDX = createMDX();
 
 /** @type {import('next').NextConfig} */
 const config = {
+  typedRoutes: true,
   basePath: process.env.PAGES_BASE_PATH,
   output: "export",
   reactStrictMode: true,
